@@ -1,0 +1,11 @@
+export class UsuarioAppp {
+
+    public primerNombre: string;
+    public segundoNombre: string;
+    public primerApellido: string;
+    public segundoApellido: string;
+    public cedula: string;
+    public correo: string;
+    public fechaNacimiento: Date;
+
+}
