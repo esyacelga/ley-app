@@ -1,0 +1,7 @@
+{
+  "name": "LeyServiceApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
