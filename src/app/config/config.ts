@@ -1,7 +1,7 @@
-export const URL_SERVICIOS = 'http://localhost:8080/siisspol-web';
+export const URL_SERVICIOS = 'http://192.168.2.232:8080/siisspol-web';
 
 export const SUCCESS_MESSAGE = 'Proceso ejecutado exitosamente';
-export const ERROR_MESSAGE = 'Hubo un problema al ejecutar';
+export const ERROR_MESSAGE = 'Hubo un problema en la aplicación, por favor espere, estamos solucionando este problema';
 export const LOAD_MESSAGE = 'Procesando...';
 export const DURATION_TOAST = 3000;
 export const COLOR_TOAST_PRIMARY = 'primary';
