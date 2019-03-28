@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UsuarioAppp} from '../../../../classes/UsuarioApp';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
-import {LoadingController, ToastController} from '@ionic/angular';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -10,26 +10,41 @@ import {LoadingController, ToastController} from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
     usuarioApp: UsuarioAppp = new UsuarioAppp();
+    loginForm: FormGroup;
+    error_messages = {
+        'email': [
+            {type: 'required', message: 'Email es requerido'},
+            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
+            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
 
-    constructor(public usuarioService: UsuarioService, private notify: ToastController, public loadingController: LoadingController) {
+        ],
+        'password': [
+            {type: 'required', message: 'Email es requerido'},
+            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
+            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
+
+        ],
+    };
+
+    constructor(public usuarioService: UsuarioService, public formFuilder: FormBuilder) {
+        this.loginForm = this.formFuilder.group({
+            password: new FormControl('', Validators.compose([
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30)
+            ])),
+            email: new FormControl('', Validators.compose([
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30)
+            ]))
+        });
     }
 
     registerNewUser(usuario: UsuarioAppp) {
-        this.usuarioService.registrarUsuario(this.usuarioApp);
+        this.usuarioService.registrarUsuario(usuario);
 
     }
-
-/*    async presentLoading() {
-        const loading = await this.loadingController.create({
-            message: 'Hellooo',
-            duration: 2000
-        });
-        await loading.present();
-
-        const {role, data} = await loading.onDidDismiss();
-
-        console.log('Loading dismissed!');
-    }*/
 
     ngOnInit() {
     }

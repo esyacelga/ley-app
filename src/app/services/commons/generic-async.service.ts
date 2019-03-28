@@ -47,6 +47,7 @@ export class GenericAsyncService {
                 resolve(resp);
             }, error => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
+                this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.errorMessage, COLOR_TOAST_ERROR);
                 reject(error);
             });

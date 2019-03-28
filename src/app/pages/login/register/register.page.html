@@ -12,53 +12,79 @@
 </ion-header>
 
 <ion-content>
-
-    <ion-list>
+    <form [formGroup]="loginForm">
         <ion-item>
-            <ion-label position="floating">Primer nombre</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.primerNombre"></ion-input>
+            <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
         </ion-item>
-
+        <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+                <div class="error-message"
+                     *ngIf="loginForm.get('email').hasError(error.type) && (loginForm.get('email').dirty || loginForm.get('email').touched) ">
+                    {{error.message}}
+                </div>
+            </ng-container>
+        </div>
         <ion-item>
-            <ion-label position="floating">Segundo nombre</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.segundoNombre"></ion-input>
+            <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
         </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+                <div class="error-message"
+                     *ngIf="loginForm.get('password').hasError(error.type) && (loginForm.get('password').dirty || loginForm.get('password').touched) ">
+                    {{error.message}}
+                </div>
+            </ng-container>
+        </div>
+        <ion-button [disabled]="!loginForm.valid" shape="round" size="default" color="primary" expand="block"
+                    (click)="registerNewUser(usuarioApp)">Login
+        </ion-button>
+    </form>
+    <!--   <ion-list>
+           <ion-item>
+               <ion-label position="floating">Primer nombre</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.primerNombre"></ion-input>
+           </ion-item>
 
-        <ion-item>
-            <ion-label position="floating">Primer apellido</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.primerApellido"></ion-input>
-        </ion-item>
+           <ion-item>
+               <ion-label position="floating">Segundo nombre</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.segundoNombre"></ion-input>
+           </ion-item>
 
-        <ion-item>
-            <ion-label position="floating">Segundo apellido</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.segundoApellido"></ion-input>
-        </ion-item>
+           <ion-item>
+               <ion-label position="floating">Primer apellido</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.primerApellido"></ion-input>
+           </ion-item>
 
-        <ion-item>
-            <ion-label position="floating">Cédula</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.cedula"></ion-input>
-        </ion-item>
+           <ion-item>
+               <ion-label position="floating">Segundo apellido</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.segundoApellido"></ion-input>
+           </ion-item>
 
-
-        <ion-item>
-            <ion-label position="floating">Correo</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.correo"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-label position="floating">Clave</ion-label>
-            <ion-input [(ngModel)]="usuarioApp.clave"></ion-input>
-        </ion-item>
-
-        <pre>{{usuarioApp|json}}</pre>
-
-  <!--      <ion-item>
-            <ion-label>Fecha de nacimiento</ion-label>
-            <ion-datetime [(ngModel)]="usuarioApp.fechaNacimiento" display-format="MMM DD, YYYY"></ion-datetime>
-        </ion-item>-->
+           <ion-item>
+               <ion-label position="floating">Cédula</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.cedula"></ion-input>
+           </ion-item>
 
 
-    </ion-list>
+           <ion-item>
+               <ion-label position="floating">Correo</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.correo"></ion-input>
+           </ion-item>
+
+           <ion-item>
+               <ion-label position="floating">Clave</ion-label>
+               <ion-input [(ngModel)]="usuarioApp.clave"></ion-input>
+           </ion-item>
+
+           <pre>{{usuarioApp|json}}</pre>
+
+     &lt;!&ndash;      <ion-item>
+               <ion-label>Fecha de nacimiento</ion-label>
+               <ion-datetime [(ngModel)]="usuarioApp.fechaNacimiento" display-format="MMM DD, YYYY"></ion-datetime>
+           </ion-item>&ndash;&gt;
+
+
+       </ion-list>-->
 
 
 </ion-content>
