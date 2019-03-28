@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {LoginPipe} from './pages/login.pipe';
 import {FormsModule} from '@angular/forms';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import {Toast} from '@ionic-native/toast/ngx';
 
 @NgModule({
     declarations: [AppComponent, LoginPipe],
@@ -18,6 +19,7 @@ import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule, HttpClientJsonpModule],
     providers: [
         StatusBar,
+        Toast,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],

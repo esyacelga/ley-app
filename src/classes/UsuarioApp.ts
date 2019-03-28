@@ -5,6 +5,7 @@ export class UsuarioAppp {
     public primerApellido: string;
     public segundoApellido: string;
     public cedula: string;
+    public clave: string;
     public correo: string;
     public fechaNacimiento: Date;
 
