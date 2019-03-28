@@ -15,12 +15,11 @@ export class RegisterPage implements OnInit {
     }
 
     registerNewUser(usuario: UsuarioAppp) {
-        //this.presentLoading();
         this.usuarioService.registrarUsuario(this.usuarioApp);
 
     }
 
-    async presentLoading() {
+/*    async presentLoading() {
         const loading = await this.loadingController.create({
             message: 'Hellooo',
             duration: 2000
@@ -30,7 +29,7 @@ export class RegisterPage implements OnInit {
         const {role, data} = await loading.onDidDismiss();
 
         console.log('Loading dismissed!');
-    }
+    }*/
 
     ngOnInit() {
     }
