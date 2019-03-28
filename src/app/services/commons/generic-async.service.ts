@@ -40,6 +40,7 @@ export class GenericAsyncService {
                 messages.toastColor = COLOR_TOAST_PRIMARY;
             }
             this.loading.present('messagesService.loadMessagesOverview', messages.loadingMessage);
+            this.loading.dismiss('messagesService.loadMessagesOverview');
             this.utilService.procEjecucionGenercia(genericObject, PROC_XML_REGISTRAR_USUARIO).subscribe(resp => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.successMessaje, messages.toastColor);
