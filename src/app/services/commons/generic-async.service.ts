@@ -44,7 +44,12 @@ export class GenericAsyncService {
             this.utilService.procEjecucionGenercia(genericObject, PROC_XML_REGISTRAR_USUARIO).subscribe(resp => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.successMessaje, messages.toastColor);
-                resolve(resp);
+                if (resp.RETURN_VALUE !== 1) {
+                    this.presentToast(resp.AS_MSJ, COLOR_TOAST_ERROR);
+                    reject(resp.AS_MSJ);
+                } else {
+                    resolve(resp);
+                }
             }, error => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.loading.dismiss('messagesService.loadMessagesOverview');

@@ -7,6 +7,7 @@ export class UsuarioAppp {
     public cedula: string;
     public clave: string;
     public correo: string;
+    public passwordValidator: string;
     public fechaNacimiento: Date;
 
 }
