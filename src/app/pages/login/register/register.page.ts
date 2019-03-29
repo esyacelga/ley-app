@@ -17,7 +17,7 @@ export class RegisterPage implements OnInit {
             {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
             {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
         ],
-        'password': [
+        'clave': [
             {type: 'required', message: 'Password es requerido'},
             {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
             {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
@@ -57,7 +57,7 @@ export class RegisterPage implements OnInit {
                 Validators.maxLength(100)
             ])),
             segundoApellido: new FormControl('', null),
-            password: new FormControl('', Validators.compose([
+            clave: new FormControl('', Validators.compose([
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(30)
@@ -72,7 +72,7 @@ export class RegisterPage implements OnInit {
                 Validators.minLength(6),
                 Validators.maxLength(30)
             ]))
-        }, {validators: this.isEquals('password', 'passwordValidator')});
+        }, {validators: this.isEquals('clave', 'passwordValidator')});
     }
 
     isEquals(campo: string, campoToValidate: string) {
