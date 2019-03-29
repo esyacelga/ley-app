@@ -33,16 +33,36 @@ export class RegisterPage implements OnInit {
                 Validators.minLength(6),
                 Validators.maxLength(30)
             ])),
+            passwordValidator: new FormControl('', Validators.compose([
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(30)
+            ])),
             email: new FormControl('', Validators.compose([
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(30)
             ]))
-        });
+        }, {validators: this.isEquals('password', 'passwordValidator')});
     }
 
-    registerNewUser(usuario: UsuarioAppp) {
-        this.usuarioService.registrarUsuario(usuario);
+    isEquals(campo: string, campoToValidate: string) {
+        return (group: FormGroup) => {
+            const pass1 = group.controls[campo].value;
+            const pass2 = group.controls[campoToValidate].value;
+            if (pass1 === pass2) {
+                return null;
+            } else {
+                return {
+                    sonIguales: true
+                };
+            }
+        };
+    }
+
+    registerNewUser() {
+        console.log(this.loginForm.value);
+        //this.usuarioService.registrarUsuario(usuario);
 
     }
 

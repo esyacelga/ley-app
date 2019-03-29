@@ -12,7 +12,33 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" (ngSubmit)="registerNewUser()">
+        <ion-item>
+            <ion-label position="floating">Primer nombre</ion-label>
+            <ion-input formControlName="primerNombre"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+                <div class="error-message"
+                     *ngIf="loginForm.get('primerNombre').hasError(error.type) && (loginForm.get('primerNombre').dirty || loginForm.get('primerNombre').touched) ">
+                    {{error.message}}
+                </div>
+            </ng-container>
+        </div>
+
+        <ion-item>
+            <ion-label position="floating">Segundo nombre</ion-label>
+            <ion-input formControlName="segundoNombre"></ion-input>
+        </ion-item>
+        <div class="error-messages">
+            <ng-container *ngFor="let error of error_messages.email">
+                <div class="error-message"
+                     *ngIf="loginForm.get('segundoNombre').hasError(error.type) && (loginForm.get('segundoNombre').dirty || loginForm.get('segundoNombre').touched) ">
+                    {{error.message}}
+                </div>
+            </ng-container>
+        </div>
+
         <ion-item>
             <ion-input formControlName="email" type="text" placeholder="Email"></ion-input>
         </ion-item>
