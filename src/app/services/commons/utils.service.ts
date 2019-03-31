@@ -121,21 +121,30 @@ export class UtilsService {
 
     public proPostXMLServiceRegister = function (genericObject: any, nombreSP: string) {
         const data = this.xmlParse.toXML(genericObject);
-        this.http.get('http://localhost:8080/siisspol-web/userdetails/?id=q').subscribe(resp => {
+        const url = URL_SERVICIOS + '/proGetXMLService';
+        this.http.get(url + '/?parametroXML=q').subscribe(resp => {
             console.log(resp);
         }, error1 => {
             console.log(error1);
         });
     };
 
-    public procEjecucionGenercia = function (genericObject: any, nombreSP: string) {
+
+    public procConsultaGenerica = function (genericObject: any, nombreSP: string, urlRestService: string) {
+        const data = this.toXML(genericObject);
+        const obj = new UploadFile();
+        let url = URL_SERVICIOS + '/' + urlRestService;
+        url = +'/' + data + '/' + nombreSP;
+        return this.http.get(url, obj);
+    };
+
+    public procEjecucionGenerica = function (genericObject: any, nombreSP: string, urlRestService: string) {
         const data = this.toXML(genericObject);
         const obj = new UploadFile();
         obj.valorXml = data;
         obj.storeProcedure = nombreSP;
-        const url = URL_SERVICIOS + '/proPostXMLServiceRegister';
+        const url = URL_SERVICIOS + '/' + urlRestService;
         return this.http.post(url, obj);
     };
-
 
 }

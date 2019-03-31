@@ -8,11 +8,11 @@ import {
     DURATION_TOAST,
     ERROR_MESSAGE,
     LOAD_MESSAGE,
-    PROC_XML_REGISTRAR_USUARIO,
+    PROC_GET_XML_GENERICO,
+    PROC_XML_REST_GENERICO,
     SUCCESS_MESSAGE
 } from '../../config/config';
-import {ResponceOptions} from '../../../classes/ResponceOptions';
-import {parseString} from 'xml2js';
+import {RequestOptions} from '../../../classes/RequestOptions';
 
 @Injectable({
     providedIn: 'root'
@@ -23,10 +23,61 @@ export class GenericAsyncService {
     }
 
 
-    public ejecucionGenerica = function (genericObject: any, storeProcedure: string, messages?: ResponceOptions) {
+    public getGenericObjects = function (genericObject: any, storeProcedure: string, options?: RequestOptions) {
+        if (options === undefined) {
+            options = new RequestOptions();
+        }
         const promesa = new Promise((resolve, reject) => {
-            if (messages === undefined) {
-                messages = new ResponceOptions();
+            if (options.restUrl === undefined) {
+                options.restUrl = PROC_GET_XML_GENERICO;
+            }
+
+            if (options.successMessaje === undefined) {
+                options.successMessaje = SUCCESS_MESSAGE;
+            }
+            if (options.errorMessage === undefined) {
+                options.errorMessage = ERROR_MESSAGE;
+            }
+            if (options.loadingMessage === undefined) {
+                options.loadingMessage = LOAD_MESSAGE;
+            }
+            if (options.toastColor === undefined) {
+                options.toastColor = COLOR_TOAST_PRIMARY;
+            }
+            this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
+            this.loading.dismiss('messagesService.loadMessagesOverview');
+            this.utilService.procConsultaGenerica(genericObject, storeProcedure, options.restUrl).subscribe(resp => {
+                this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
+                this.loading.dismiss('messagesService.loadMessagesOverview');
+                if (resp.RETURN_VALUE !== 1) {
+                    this.presentToast(resp.AS_MSJ, COLOR_TOAST_ERROR);
+                    reject(resp.AS_MSJ);
+                } else {
+                    let obj = null;
+                    if (options.responseType === 1) {
+                        obj = this.utilService.entidadDesdeXML(resp.AS_XML);
+                    } else {
+                        obj = this.utilService.listaDesdeXML(resp.AS_XML);
+                    }
+                    resolve(obj);
+                }
+            }, error => {
+                this.loading.dismiss('messagesService.loadMessagesOverview');
+                this.loading.dismiss('messagesService.loadMessagesOverview');
+                this.presentToast(options.errorMessage, COLOR_TOAST_ERROR);
+                reject(error);
+            });
+        });
+        return promesa;
+    };
+
+    public ejecucionGenerica = function (genericObject: any, storeProcedure: string, messages?: RequestOptions) {
+        const promesa = new Promise((resolve, reject) => {
+            if (!messages) {
+                messages = new RequestOptions();
+            }
+            if (messages.restUrl === undefined) {
+                messages.restUrl = PROC_XML_REST_GENERICO;
             }
             if (messages.successMessaje === undefined) {
                 messages.successMessaje = SUCCESS_MESSAGE;
@@ -42,7 +93,7 @@ export class GenericAsyncService {
             }
             this.loading.present('messagesService.loadMessagesOverview', messages.loadingMessage);
             this.loading.dismiss('messagesService.loadMessagesOverview');
-            this.utilService.procEjecucionGenercia(genericObject, storeProcedure).subscribe(resp => {
+            this.utilService.procEjecucionGenerica(genericObject, storeProcedure, messages.restUrl).subscribe(resp => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.successMessaje, messages.toastColor);
                 if (resp.RETURN_VALUE !== 1) {
@@ -68,11 +119,6 @@ export class GenericAsyncService {
         return promesa;
     };
 
-    public toJson = function (xml: string) {
-        parseString(xml, {explicitArray: false}, function (error, result) {
-            console.log(result);
-        });
-    };
 
     private async presentToast(mensaje, color) {
         const toast = await this.notify.create({

@@ -7,5 +7,11 @@ export const DURATION_TOAST = 3000;
 export const COLOR_TOAST_PRIMARY = 'primary';
 export const COLOR_TOAST_ERROR = 'danger';
 
+
+// Contantes servicios rest
+export const PROC_XML_REST_GENERICO = 'proPostXMLService';
+export const PROC_XML_REST_REGISTRO_USUARIO = 'proPostXMLServiceRegister';
+export const PROC_GET_XML_GENERICO = 'proGetXMLService';
+
 // Contantes store procedure
 export const PROC_XML_REGISTRAR_USUARIO = 'dbo.proc_xml_registrar_usuario_app';
