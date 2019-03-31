@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UsuarioAppp} from '../../../../classes/UsuarioApp';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {RegistroMensajes} from './RegistroMensajes';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-register',
@@ -11,39 +13,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class RegisterPage implements OnInit {
     usuarioApp: UsuarioAppp = new UsuarioAppp();
     loginForm: FormGroup;
-    error_messages = {
-        'email': [
-            {type: 'required', message: 'Email es requerido'},
-            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
-            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
-        ],
-        'clave': [
-            {type: 'required', message: 'Password es requerido'},
-            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
-            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
+    registoMensajes: RegistroMensajes = new RegistroMensajes();
+    error_messages = this.registoMensajes.error_messages;
 
-        ],
-        'passwordValidator': [
-            {type: 'required', message: 'La validación del password es requrido'},
-            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
-            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
-
-        ],
-        'primerNombre': [
-            {type: 'required', message: 'Primer nombre es requerido'},
-            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
-            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
-
-        ],
-        'primerApellido': [
-            {type: 'required', message: 'Primer apellido es requerido'},
-            {type: 'minlength', message: 'Debe ser mayor o igual a 6 caracteres'},
-            {type: 'maxlength', message: 'Debe ser menor o igual a 30 caracteres'}
-
-        ],
-    };
-
-    constructor(public usuarioService: UsuarioService, public formFuilder: FormBuilder) {
+    constructor(public usuarioService: UsuarioService, public formFuilder: FormBuilder, private router: Router) {
         this.loginForm = this.formFuilder.group({
             primerNombre: new FormControl('', Validators.compose([
                 Validators.required,
@@ -91,7 +64,10 @@ export class RegisterPage implements OnInit {
 
     registerNewUser() {
         const usuarioApp = <UsuarioAppp>this.loginForm.value;
-        this.usuarioService.registrarUsuario(usuarioApp);
+        this.usuarioService.registrarUsuario(usuarioApp).then(respuesta => {
+            this.router.navigate(['/home'])
+            console.log('');
+        });
 
     }
 
