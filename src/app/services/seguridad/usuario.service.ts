@@ -17,7 +17,7 @@ export class UsuarioService {
 
 
     public registrarUsuario = function (usuario: UsuarioAppp) {
-        this.genericService.ejecucionGenerica(usuario, PROC_XML_REGISTRAR_USUARIO);
+        return this.genericService.ejecucionGenerica(usuario, PROC_XML_REGISTRAR_USUARIO);
     };
 
 
