@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {UsuarioService} from '../../../services/seguridad/usuario.service';
 
 @Component({
     selector: 'app-signin',
@@ -7,15 +7,18 @@ import {NavController} from '@ionic/angular';
     styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
+    parametro: string;
 
-    constructor(private nav: NavController) {
-    }
-
-    goToRegister() {
-        this.nav.navigateForward('register');
+    constructor(private usuarioService: UsuarioService) {
     }
 
     ngOnInit() {
+    }
+
+    verifyUser(parametro) {
+        this.usuarioService.verificarUsuario(parametro).then(respuesta => {
+            console.log(respuesta);
+        });
     }
 
 }

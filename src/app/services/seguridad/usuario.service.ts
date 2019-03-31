@@ -1,10 +1,7 @@
 import {Injectable} from '@angular/core';
-import {UtilsService} from '../commons/utils.service';
 import {UsuarioAppp} from '../../../classes/UsuarioApp';
-import {ToastController} from '@ionic/angular';
-import {LoadingService} from '../commons/loading.service';
 import {GenericAsyncService} from '../commons/generic-async.service';
-import {PROC_XML_REGISTRAR_USUARIO, PROC_XML_REST_REGISTRO_USUARIO} from '../../config/config';
+import {PROC_XML_CONSULTAS_USUARIO, PROC_XML_REGISTRAR_USUARIO, PROC_XML_REST_REGISTRO_USUARIO} from '../../config/config';
 import {RequestOptions} from '../../../classes/RequestOptions';
 
 @Injectable({
@@ -13,7 +10,7 @@ import {RequestOptions} from '../../../classes/RequestOptions';
 export class UsuarioService {
 
 
-    constructor(private utilService: UtilsService, private notify: ToastController, protected loading: LoadingService, private genericService: GenericAsyncService) {
+    constructor(private genericService: GenericAsyncService) {
     }
 
 
@@ -24,9 +21,15 @@ export class UsuarioService {
     };
 
 
-    /*    public verificarUsuario = function (usuario: UsuarioAppp) {
-            this.gener
-        }*/
+    public verificarUsuario = function (parametro: string) {
+        const requestOptions = new RequestOptions();
+        requestOptions.responseType = 1;
+        const obj = {
+            parametroXML: parametro,
+            tipoConsulta: 'OBTENERUSUARIO'
+        };
+        return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+    };
 
 }
 

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Builder} from 'xml2js';
 import {UploadFile} from '../../../classes/UploadFile';
 import {URL_SERVICIOS} from '../../config/config';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -134,7 +134,10 @@ export class UtilsService {
         const data = this.toXML(genericObject);
         const obj = new UploadFile();
         let url = URL_SERVICIOS + '/' + urlRestService;
-        url = +'/' + data + '/' + nombreSP;
+        url = url + '/' + '"' + 'hpola' + '"' + '/' + '"' + nombreSP + '"';
+        const headers = new HttpHeaders({'Content-Type': 'text/xml; charset=utf-8'});
+
+
         return this.http.get(url, obj);
     };
 

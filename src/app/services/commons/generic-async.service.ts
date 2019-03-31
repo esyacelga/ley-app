@@ -24,7 +24,7 @@ export class GenericAsyncService {
 
 
     public getGenericObjects = function (genericObject: any, storeProcedure: string, options?: RequestOptions) {
-        if (options === undefined) {
+        if (!options) {
             options = new RequestOptions();
         }
         const promesa = new Promise((resolve, reject) => {
@@ -45,9 +45,7 @@ export class GenericAsyncService {
                 options.toastColor = COLOR_TOAST_PRIMARY;
             }
             this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
-            this.loading.dismiss('messagesService.loadMessagesOverview');
             this.utilService.procConsultaGenerica(genericObject, storeProcedure, options.restUrl).subscribe(resp => {
-                this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 if (resp.RETURN_VALUE !== 1) {
                     this.presentToast(resp.AS_MSJ, COLOR_TOAST_ERROR);
@@ -62,7 +60,6 @@ export class GenericAsyncService {
                     resolve(obj);
                 }
             }, error => {
-                this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(options.errorMessage, COLOR_TOAST_ERROR);
                 reject(error);
@@ -92,7 +89,6 @@ export class GenericAsyncService {
                 messages.toastColor = COLOR_TOAST_PRIMARY;
             }
             this.loading.present('messagesService.loadMessagesOverview', messages.loadingMessage);
-            this.loading.dismiss('messagesService.loadMessagesOverview');
             this.utilService.procEjecucionGenerica(genericObject, storeProcedure, messages.restUrl).subscribe(resp => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.successMessaje, messages.toastColor);
@@ -109,7 +105,6 @@ export class GenericAsyncService {
                     resolve(obj);
                 }
             }, error => {
-                this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(messages.errorMessage, COLOR_TOAST_ERROR);
                 reject(error);
