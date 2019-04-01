@@ -11,6 +11,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import {IonicStorageModule} from '@ionic/storage';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -18,6 +19,7 @@ import {IonicStorageModule} from '@ionic/storage';
     imports: [CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpClientJsonpModule, IonicStorageModule.forRoot()],
     providers: [
         StatusBar,
+        Geolocation,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],

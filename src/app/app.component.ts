@@ -25,18 +25,20 @@ export class AppComponent {
     initializeApp() {
         this.platform.ready().then(() => {
 
-            this.loginStorage.cargarStorage();
-            if (this.loginStorage.user && this.loginStorage.user.correo && this.loginStorage.user.clave) {
-
-                this.usuarioSvc.setAuthenticated(true);
-                this.navCtrl.navigateRoot('home');
-            } else {
+            this.loginStorage.cargarStorage().then(response => {
+                // @ts-ignore
+                if (response && response.clave) {
+                    this.usuarioSvc.setAuthenticated(true);
+                    this.navCtrl.navigateRoot('home');
+                } else {
+                    this.navCtrl.navigateRoot('signin');
+                }
+                this.statusBar.styleDefault();
+                this.splashScreen.hide();
+            }, reason => {
                 this.navCtrl.navigateRoot('signin');
-            }
+            });
 
-
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
         });
     }
 

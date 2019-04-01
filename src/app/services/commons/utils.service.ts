@@ -104,7 +104,7 @@ export class UtilsService {
 
 
     // Convert string/JSON to XML
-    private toXML = function (json: any) {
+    public toXML = function (json: any) {
         const builder = new Builder();
         return builder.buildObject(json);
     };
