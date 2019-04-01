@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {UsuarioAppp} from '../../../../classes/UsuarioApp';
+import {DURATION_TOAST} from '../../../config/config';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-password',
@@ -12,7 +14,7 @@ export class PasswordPage implements OnInit {
     user: UsuarioAppp = null;
     parametro: string;
 
-    constructor(private activateRoute: ActivatedRoute, private usuarioSvc: UsuarioService, private router: Router) {
+    constructor(private activateRoute: ActivatedRoute, private usuarioSvc: UsuarioService, private router: Router, private notify: ToastController) {
 
     }
 
@@ -30,8 +32,18 @@ export class PasswordPage implements OnInit {
             this.router.navigate(['/home']);
         } else {
             this.usuarioSvc.setAuthenticated(false);
-            this.router.navigate(['/home']);
+            //this.router.navigate(['/home']);
+            this.presentToast('La contraseña no coincide', 'warning');
         }
+    }
+
+    private async presentToast(mensaje, color) {
+        const toast = await this.notify.create({
+            message: mensaje,
+            duration: DURATION_TOAST,
+            color: color
+        });
+        toast.present();
     }
 
 }
