@@ -33,7 +33,7 @@ export class PasswordPage implements OnInit {
         } else {
             this.usuarioSvc.setAuthenticated(false);
             //this.router.navigate(['/home']);
-            this.presentToast('La contraseña no coincide', 'warning');
+            this.presentToast('La contraseña es incorrecta, por favor vuelva a ingresarla', 'warning');
         }
     }
 
