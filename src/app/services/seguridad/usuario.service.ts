@@ -9,6 +9,7 @@ import {RequestOptions} from '../../../classes/RequestOptions';
 })
 export class UsuarioService {
 
+    usuario: UsuarioAppp;
     authState;
 
     constructor(private genericService: GenericAsyncService) {

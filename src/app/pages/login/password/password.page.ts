@@ -3,7 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {UsuarioAppp} from '../../../../classes/UsuarioApp';
 import {DURATION_TOAST} from '../../../config/config';
-import {ToastController} from '@ionic/angular';
+import {Platform, ToastController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
+import {LoginStorageService} from '../../../services/seguridad/login-storage.service';
 
 @Component({
     selector: 'app-password',
@@ -14,7 +16,13 @@ export class PasswordPage implements OnInit {
     user: UsuarioAppp = null;
     parametro: string;
 
-    constructor(private activateRoute: ActivatedRoute, private usuarioSvc: UsuarioService, private router: Router, private notify: ToastController) {
+    constructor(private activateRoute: ActivatedRoute,
+                private usuarioSvc: UsuarioService,
+                private router: Router,
+                private platform: Platform,
+                private storage: Storage,
+                private loginStorageSvc: LoginStorageService,
+                private notify: ToastController) {
 
     }
 
@@ -29,13 +37,14 @@ export class PasswordPage implements OnInit {
     verifyUser(parameter) {
         if (this.user.clave === parameter) {
             this.usuarioSvc.setAuthenticated(true);
+            this.loginStorageSvc.guardarStorage(this.user);
             this.router.navigate(['/home']);
         } else {
             this.usuarioSvc.setAuthenticated(false);
-            //this.router.navigate(['/home']);
             this.presentToast('La contraseña es incorrecta, por favor vuelva a ingresarla', 'warning');
         }
     }
+
 
     private async presentToast(mensaje, color) {
         const toast = await this.notify.create({
