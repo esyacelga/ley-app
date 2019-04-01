@@ -23,11 +23,11 @@ export class GenericAsyncService {
     }
 
 
-    public getGenericObjects = function (genericObject: any, storeProcedure: string, options?: RequestOptions) {
+    public async getGenericObjects  (genericObject: any, storeProcedure: string, options?: RequestOptions) {
         if (!options) {
             options = new RequestOptions();
         }
-        const promesa = new Promise((resolve, reject) => {
+        const promesa = new Promise(async (resolve, reject) => {
             if (options.restUrl === undefined) {
                 options.restUrl = PROC_GET_XML_GENERICO;
             }
@@ -44,11 +44,11 @@ export class GenericAsyncService {
             if (options.toastColor === undefined) {
                 options.toastColor = COLOR_TOAST_PRIMARY;
             }
-            this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
-            this.utilService.procConsultaGenerica(genericObject, storeProcedure, options.restUrl).subscribe(resp => {
+            await this.loading.present('messagesService.loadMessagesOverview', 'Procesando...');
+            this.utilService.procConsultaGenerica(genericObject, storeProcedure, options.restUrl).subscribe(async resp => {
                 this.loading.dismiss('messagesService.loadMessagesOverview');
                 if (resp.RETURN_VALUE !== 1) {
-                    this.presentToast(resp.AS_MSJ, COLOR_TOAST_ERROR);
+                    await this.presentToast(resp.AS_MSJ, COLOR_TOAST_ERROR);
                     reject(resp.AS_MSJ);
                 } else {
                     let obj = null;
@@ -59,14 +59,14 @@ export class GenericAsyncService {
                     }
                     resolve(obj);
                 }
-            }, error => {
-                this.loading.dismiss('messagesService.loadMessagesOverview');
+            }, async error => {
+                await this.loading.dismiss('messagesService.loadMessagesOverview');
                 this.presentToast(options.errorMessage, COLOR_TOAST_ERROR);
                 reject(error);
             });
         });
         return promesa;
-    };
+    }
 
     public ejecucionGenerica = function (genericObject: any, storeProcedure: string, messages?: RequestOptions) {
         const promesa = new Promise((resolve, reject) => {

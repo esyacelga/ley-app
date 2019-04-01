@@ -133,12 +133,10 @@ export class UtilsService {
     public procConsultaGenerica = function (genericObject: any, nombreSP: string, urlRestService: string) {
         const data = this.toXML(genericObject);
         const obj = new UploadFile();
-        let url = URL_SERVICIOS + '/' + urlRestService;
-        url = url + '/' + '"' + 'hpola' + '"' + '/' + '"' + nombreSP + '"';
-        const headers = new HttpHeaders({'Content-Type': 'text/xml; charset=utf-8'});
-
-
-        return this.http.get(url, obj);
+        obj.valorXml = data;
+        obj.storeProcedure = nombreSP;
+        const url = URL_SERVICIOS + '/' + urlRestService;
+        return this.http.put(url, obj);
     };
 
     public procEjecucionGenerica = function (genericObject: any, nombreSP: string, urlRestService: string) {

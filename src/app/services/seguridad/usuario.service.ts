@@ -30,6 +30,15 @@ export class UsuarioService {
         };
         return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
     };
+    public obtenerUsuarioPorId = function (parametro: string) {
+        const requestOptions = new RequestOptions();
+        requestOptions.responseType = 1;
+        const obj = {
+            parametroXML: parametro,
+            tipoConsulta: 'obtenerUsuarioPorId'
+        };
+        return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+    };
 
 }
 

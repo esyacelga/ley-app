@@ -1,5 +1,6 @@
 export class UsuarioAppp {
 
+    public idUsuarioApp;
     public primerNombre: string;
     public segundoNombre: string;
     public primerApellido: string;

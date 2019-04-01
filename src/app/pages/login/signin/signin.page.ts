@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
+import {Router} from '@angular/router';
+import {DURATION_TOAST} from '../../../config/config';
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-signin',
@@ -9,7 +12,7 @@ import {UsuarioService} from '../../../services/seguridad/usuario.service';
 export class SigninPage implements OnInit {
     parametro: string;
 
-    constructor(private usuarioService: UsuarioService) {
+    constructor(private usuarioService: UsuarioService, private router: Router, private notify: ToastController) {
     }
 
     ngOnInit() {
@@ -17,8 +20,22 @@ export class SigninPage implements OnInit {
 
     verifyUser(parametro) {
         this.usuarioService.verificarUsuario(parametro).then(respuesta => {
-            console.log(respuesta);
+            if (respuesta) {
+                this.router.navigate(['/password', respuesta.idUsuarioApp]);
+            } else {
+                this.presentToast('El usuario no existe', 'warning');
+            }
         });
+    }
+
+
+    private async presentToast(mensaje, color) {
+        const toast = await this.notify.create({
+            message: mensaje,
+            duration: DURATION_TOAST,
+            color: color
+        });
+        toast.present();
     }
 
 }
