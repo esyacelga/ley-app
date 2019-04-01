@@ -9,11 +9,20 @@ import {RequestOptions} from '../../../classes/RequestOptions';
 })
 export class UsuarioService {
 
+    authState;
 
     constructor(private genericService: GenericAsyncService) {
+
     }
 
 
+    public isAuthenticated() {
+        return this.authState;
+    }
+
+    public setAuthenticated = function (valor: Boolean) {
+        this.authState = valor;
+    };
     public registrarUsuario = function (usuario: UsuarioAppp) {
         const requestOptions = new RequestOptions();
         requestOptions.restUrl = PROC_XML_REST_REGISTRO_USUARIO;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {UsuarioAppp} from '../../../../classes/UsuarioApp';
 
@@ -12,7 +12,7 @@ export class PasswordPage implements OnInit {
     user: UsuarioAppp = null;
     parametro: string;
 
-    constructor(private activateRoute: ActivatedRoute, private usuarioSvc: UsuarioService) {
+    constructor(private activateRoute: ActivatedRoute, private usuarioSvc: UsuarioService, private router: Router) {
 
     }
 
@@ -20,9 +20,18 @@ export class PasswordPage implements OnInit {
         this.activateRoute.params.subscribe(params => {
             this.usuarioSvc.obtenerUsuarioPorId(params.id).then(respuesta => {
                 this.user = respuesta;
-                console.log(this.user);
             });
         });
+    }
+
+    verifyUser(parameter) {
+        if (this.user.clave === parameter) {
+            this.usuarioSvc.setAuthenticated(true);
+            this.router.navigate(['/home']);
+        } else {
+            this.usuarioSvc.setAuthenticated(false);
+            this.router.navigate(['/home']);
+        }
     }
 
 }
