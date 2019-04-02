@@ -88,6 +88,6 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>Necesitamos la ubicacion.</string>
     </edit-config>
-    <engine name="android" spec="7.1.4" />
     <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
+    <engine name="android" spec="7.1.4" />
 </widget>

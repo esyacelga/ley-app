@@ -45,6 +45,7 @@ export class LoginStorageService {
 
     guardarStorage(usuario: UsuarioAppp) {
         if (this.platform.is('cordova')) {
+            // const obj = this.utilSvc.toXML(usuario);
             this.storage.set('usuario', usuario);
         } else {
             localStorage.setItem('usuario', JSON.stringify(usuario));
