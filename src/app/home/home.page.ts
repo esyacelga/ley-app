@@ -18,13 +18,13 @@ export class HomePage implements OnInit {
 
     ngOnInit(): void {
         this.pushSvc.pushLitener.subscribe(noti => {
+            console.log('Cargando Listener');
             this.mensajes.unshift(noti);
             this.appli.tick();
         });
     }
 
     async ionViewWillEnter() {
-        console.log('Will-Enter -cargar mensajes');
         this.mensajes = await this.pushSvc.getMensajes();
     }
 
