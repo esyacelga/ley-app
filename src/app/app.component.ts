@@ -5,6 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {LoginStorageService} from './services/seguridad/login-storage.service';
 import {UsuarioService} from './services/seguridad/usuario.service';
+import {PushService} from './services/commons/push.service';
 
 @Component({
     selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent {
         private statusBar: StatusBar,
         private navCtrl: NavController,
         private usuarioSvc: UsuarioService,
+        private pushSvc: PushService,
         private loginStorage: LoginStorageService
     ) {
         this.initializeApp();
@@ -24,7 +26,7 @@ export class AppComponent {
 
     initializeApp() {
         this.platform.ready().then(() => {
-
+            this.pushSvc.configuracionInicial();
             this.loginStorage.cargarStorage().then(response => {
                 // @ts-ignore
                 if (response && response.clave) {
