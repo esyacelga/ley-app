@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ModalController} from '@ionic/angular';
 
 @Component({
-  selector: 'app-logview',
-  templateUrl: './logview.page.html',
-  styleUrls: ['./logview.page.scss'],
+    selector: 'app-logview',
+    templateUrl: './logview.page.html',
+    styleUrls: ['./logview.page.scss'],
 })
 export class LogviewPage implements OnInit {
 
-  constructor() { }
+    @Input() nombre;
+    @Input() pais;
 
-  ngOnInit() {
-  }
+    constructor(private modalCtrl: ModalController) {
+    }
 
+    ngOnInit() {
+    }
+
+    salirSinArgumentos() {
+        this.modalCtrl.dismiss();
+    }
+
+    salirConArgumentos() {
+        this.modalCtrl.dismiss(
+            {
+                nombre: 'data',
+                pais: '2222'
+            }
+        );
+    }
 }

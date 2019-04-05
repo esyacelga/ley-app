@@ -26,7 +26,9 @@ export class HomePage implements OnInit {
             component: LogviewPage,
             componentProps: {'nombre': 'santiago', 'pais': 'ecuador'}
         });
-        return await modal.present();
+        await modal.present();
+        const {data} = await modal.onDidDismiss();
+        console.log('retorno', data);
     }
 
     ngOnInit(): void {
