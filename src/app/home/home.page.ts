@@ -22,6 +22,18 @@ export class HomePage implements OnInit {
         this.ubicacionSvc.iniciarGeolocalicacion();
     }
 
+    borrarMensajes() {
+        this.pushSvc.borrarMensajes('mensajes');
+    }
+
+    borrarMensaje(index: number) {
+        console.log(index);
+        console.log('Numero de items antes: ', this.mensajes.length);
+        this.mensajes.splice(index, 1);
+        console.log('Numero de items despues: ', this.mensajes.length);
+        this.pushSvc.guardarMensajes(this.mensajes);
+    }
+
     verMensaje(titulo: string, tipo: string, mensajeError: string) {
         this.presentModal(titulo, tipo, mensajeError);
     }
@@ -46,6 +58,7 @@ export class HomePage implements OnInit {
 
     async ionViewWillEnter() {
         this.mensajes = await this.pushSvc.getMensajes();
+
     }
 
 

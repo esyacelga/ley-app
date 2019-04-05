@@ -65,13 +65,19 @@ export class PushService {
         console.log(JSON.stringify(this.mensajes));
         console.log(' fin print notificacionRecibida');
         this.pushLitener.emit(payload);
-        await this.guardarMensajes();
+        await this.guardarMensajes(this.mensajes);
 
     }
 
 
-    guardarMensajes() {
-        this.storage.set('mensajes', this.mensajes);
+    guardarMensajes(lstObj: any) {
+        this.storage.set('mensajes', lstObj);
+    }
+
+    async borrarMensajes(key: string) {
+        await this.storage.remove(key);
+        this.mensajes = [];
+        this.guardarMensajes(this.mensajes);
     }
 
     async cargarMensajes() {
