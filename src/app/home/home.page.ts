@@ -3,7 +3,7 @@ import {UbicacionProviderService} from '../services/commons/ubicacion-provider.s
 import {PushService} from '../services/commons/push.service';
 import {OSNotificationPayload} from '@ionic-native/onesignal';
 import {ModalController} from '@ionic/angular';
-import {RegisterPage} from '../pages/login/register/register.page';
+import {LogviewPage} from '../modals/system/logview/logview.page';
 
 @Component({
     selector: 'app-home',
@@ -23,8 +23,8 @@ export class HomePage implements OnInit {
 
     async presentModal() {
         const modal = await this.modalController.create({
-            component: RegisterPage,
-            componentProps: { value: 123 }
+            component: LogviewPage,
+            componentProps: {'nombre': 'santiago', 'pais': 'ecuador'}
         });
         return await modal.present();
     }
