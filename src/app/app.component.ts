@@ -26,7 +26,11 @@ export class AppComponent {
 
     initializeApp() {
         this.platform.ready().then(() => {
-            this.pushSvc.configuracionInicial();
+            //Valida que al aplicacion no permita, iniciarlizar las notificaciones cuando este
+            //se encuetre en modo browser
+            if (this.platform.is('cordova')) {
+                this.pushSvc.configuracionInicial();
+            }
             this.loginStorage.cargarStorage().then(response => {
                 // @ts-ignore
                 if (response && response.clave) {
