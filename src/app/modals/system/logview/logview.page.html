@@ -1,14 +1,36 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title>{{nombre}}--{{pais}}</ion-title>
+    <ion-toolbar color="dark" >
+        <ion-buttons slot="start">
+            <ion-button ion-button color="primary" (click)="salirSinArgumentos()">Cerrar</ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
+<!--<ion-header>
+    <ion-toolbar color="dark">
+        <div class="ion-text-start">
+            <ion-button ion-button color="primary" (click)="registerNewUser(usuarioApp)">CREAR</ion-button>
+        </div>
+        &lt;!&ndash;<div class="ion-text-end">
+            <ion-button ion-button color="primary" (click)="registerNewUser(usuarioApp)">CREAR</ion-button>
+        </div>&ndash;&gt;
+        &lt;!&ndash;  <ion-title>
+              <ion-label>{{title}}
+                  <p>{{tipoError}}</p></ion-label>
+          </ion-title>&ndash;&gt;
+    </ion-toolbar>
+</ion-header>-->
 
-<ion-content padding="">
-    <ion-button color="primary" (click)="salirSinArgumentos();" expand="full">
+<ion-content color="dark" padding>
+    <div class="ion-text-start">
+        <p>
+            {{mensaje}}
+        </p>
+    </div>
+
+  <!--  <ion-button color="primary" (click)="salirSinArgumentos();" expand="full">
         salir sin argumentos
     </ion-button>
     <ion-button color="secondary" (click)="salirConArgumentos()" expand="full">
         salir con argumentos
-    </ion-button>
+    </ion-button>-->
 </ion-content>

@@ -8,8 +8,9 @@ import {ModalController} from '@ionic/angular';
 })
 export class LogviewPage implements OnInit {
 
-    @Input() nombre;
-    @Input() pais;
+    @Input() title;
+    @Input() mensaje;
+    @Input() tipoError;
 
     constructor(private modalCtrl: ModalController) {
     }

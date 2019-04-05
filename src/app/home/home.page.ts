@@ -14,6 +14,7 @@ export class HomePage implements OnInit {
 
     mensajes: OSNotificationPayload[] = [];
 
+
     constructor(public ubicacionSvc: UbicacionProviderService,
                 public pushSvc: PushService,
                 private appli: ApplicationRef,
@@ -21,10 +22,14 @@ export class HomePage implements OnInit {
         this.ubicacionSvc.iniciarGeolocalicacion();
     }
 
-    async presentModal() {
+    verMensaje(titulo: string, tipo: string, mensajeError: string) {
+        this.presentModal(titulo, tipo, mensajeError);
+    }
+
+    async presentModal(titulo: string, tipo: string, mensajeError: string) {
         const modal = await this.modalController.create({
             component: LogviewPage,
-            componentProps: {'nombre': 'santiago', 'pais': 'ecuador'}
+            componentProps: {title: titulo, tipoError: tipo, mensaje: mensajeError}
         });
         await modal.present();
         const {data} = await modal.onDidDismiss();
