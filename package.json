@@ -50,7 +50,8 @@
     "stream": "0.0.2",
     "timers": "^0.1.1",
     "xml2js": "^0.4.19",
-    "zone.js": "~0.8.29"
+    "zone.js": "~0.8.29",
+    "cordova-plugin-x-toast": "2.7.2"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",
@@ -94,7 +95,8 @@
       "cordova-sqlite-storage": {},
       "cordova-plugin-geolocation": {},
       "onesignal-cordova-plugin": {},
-      "cordova-plugin-uniquedeviceid": {}
+      "cordova-plugin-uniquedeviceid": {},
+      "cordova-plugin-x-toast": {}
     },
     "platforms": [
       "android"
