@@ -89,5 +89,5 @@
         <string>Necesitamos la ubicacion.</string>
     </edit-config>
     <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
-    <engine name="android" spec="7.1.4" />
+    <engine name="android" spec="~7.1.4" />
 </widget>
