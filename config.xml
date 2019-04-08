@@ -3,7 +3,7 @@
     <name>ISSPOL-APP</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.8.236:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -89,5 +89,6 @@
         <string>Necesitamos la ubicacion.</string>
     </edit-config>
     <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
-    <engine name="android" spec="~7.1.4" />
+    <allow-navigation href="http://192.168.8.236:8100" sessionid="39a83113" />
+    <engine name="android" spec="7.1.4" />
 </widget>

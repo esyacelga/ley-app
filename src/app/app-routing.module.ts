@@ -11,6 +11,8 @@ const routes: Routes = [
     {path: 'signin', loadChildren: './pages/login/signin/signin.module#SigninPageModule'},
     {path: 'register', loadChildren: './pages/login/register/register.module#RegisterPageModule'},
     {path: 'password/:id', loadChildren: './pages/login/password/password.module#PasswordPageModule'},
+    {path: 'log/:mensaje', loadChildren: './pages/system/log/log.module#LogPageModule'},
+
 
 ];
 

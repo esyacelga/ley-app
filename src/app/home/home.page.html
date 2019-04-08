@@ -1,7 +1,7 @@
 <ion-header no-border>
     <ion-toolbar color="dark">
         <ion-title>
-            ERRORES
+            ERRORES*
         </ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="borrarMensajes();" color="danger">
@@ -21,7 +21,7 @@
                 <ion-item-option color="danger" (click)="share(item)">Share</ion-item-option>
             </ion-item-options>-->
 
-            <ion-item color="dark" (click)="verMensaje(push.title,push.body,push.additionalData.en)">
+            <ion-item color="dark" [routerLink]="['/log',push.additionalData.en]">
                 <ion-label text-wrap>
                     <h4>{{push.title}}</h4>
                     <p>
