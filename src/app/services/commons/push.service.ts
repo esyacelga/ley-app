@@ -31,13 +31,11 @@ export class PushService {
 
         this.oneSignal.handleNotificationReceived().subscribe((noti) => {
             // do something when notification is received
-            console.log('Notificacion recivida 1010101101', noti);
             this.notificacionRecibida(noti);
         });
 
         this.oneSignal.handleNotificationOpened().subscribe(async (noti) => {
             // do something when a notification is opened
-            console.log('Notificacion abierta.....', noti);
             await this.notificacionRecibida(noti.notification);
         });
 
@@ -56,14 +54,10 @@ export class PushService {
         const existePush = this.mensajes.find(mensaje =>
             mensaje.notificationID === payload.notificationID);
 
-        console.log('*******');
         if (existePush) {
             return;
         }
         this.mensajes.unshift(payload);
-        console.log('init print notificacionRecibida**');
-        console.log(JSON.stringify(this.mensajes));
-        console.log(' fin print notificacionRecibida');
         this.pushLitener.emit(payload);
         await this.guardarMensajes(this.mensajes);
 
@@ -81,9 +75,7 @@ export class PushService {
     }
 
     async cargarMensajes() {
-        console.log('***Cargando los mensajes desde la aplicacion');
         this.mensajes = await this.storage.get('mensajes') || [];
-        console.log(JSON.stringify(this.mensajes));
         return this.mensajes;
     }
 
