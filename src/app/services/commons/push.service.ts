@@ -31,6 +31,7 @@ export class PushService {
 
         this.oneSignal.handleNotificationReceived().subscribe((noti) => {
             // do something when notification is received
+            console.log('Notificacion Recebida');
             this.notificacionRecibida(noti);
         });
 
@@ -59,6 +60,7 @@ export class PushService {
         }
         this.mensajes.unshift(payload);
         this.pushLitener.emit(payload);
+        console.log('NOTIFICACION A GUARDAR');
         await this.guardarMensajes(this.mensajes);
 
     }
