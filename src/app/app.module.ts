@@ -13,11 +13,12 @@ import {CommonModule} from '@angular/common';
 import {IonicStorageModule} from '@ionic/storage';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {OneSignal} from '@ionic-native/onesignal/ngx';
+import {TabsPageModule} from './tabs/tabs.module';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpClientJsonpModule, IonicStorageModule.forRoot()],
+    imports: [TabsPageModule, CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpClientJsonpModule, IonicStorageModule.forRoot()],
     providers: [
         StatusBar,
         OneSignal,

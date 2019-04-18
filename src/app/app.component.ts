@@ -29,7 +29,7 @@ export class AppComponent {
                 // @ts-ignore
                 if (response && response.clave) {
                     this.usuarioSvc.setAuthenticated(true);
-                    this.navCtrl.navigateRoot('home');
+                    this.navCtrl.navigateRoot('tabs');
                 } else {
                     this.navCtrl.navigateRoot('signin');
                 }

@@ -39,7 +39,7 @@ export class PasswordPage implements OnInit {
             this.usuarioSvc.setAuthenticated(true);
             this.usuarioSvc.setUsuario(this.user);
             this.loginStorageSvc.guardarStorage(this.user);
-            this.router.navigate(['/home']);
+            this.router.navigate(['/tabs']);
         } else {
             this.usuarioSvc.setAuthenticated(false);
             this.presentToast('La contraseña es incorrecta, por favor vuelva a ingresarla', 'warning');
