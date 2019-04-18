@@ -1,4 +1,4 @@
-export class UsuarioAppp {
+export class UsuarioApp {
 
     public idUsuarioApp;
     public primerNombre: string;
@@ -10,5 +10,7 @@ export class UsuarioAppp {
     public correo: string;
     public passwordValidator: string;
     public fechaNacimiento: Date;
+    public playerID: string;
+    public opcional: string;
 
 }
