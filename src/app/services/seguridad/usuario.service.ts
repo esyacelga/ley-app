@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {UsuarioAppp} from '../../../classes/UsuarioApp';
+import {UsuarioApp} from '../../../classes/UsuarioApp';
 import {GenericAsyncService} from '../commons/generic-async.service';
 import {PROC_XML_CONSULTAS_USUARIO, PROC_XML_REGISTRAR_USUARIO, PROC_XML_REST_REGISTRO_USUARIO} from '../../config/config';
 import {RequestOptions} from '../../../classes/RequestOptions';
@@ -9,13 +9,17 @@ import {RequestOptions} from '../../../classes/RequestOptions';
 })
 export class UsuarioService {
 
-    usuario: UsuarioAppp;
+    usuario: UsuarioApp;
     authState;
 
     constructor(private genericService: GenericAsyncService) {
 
     }
 
+
+    public setUsuario = function (usario: UsuarioApp) {
+        this.usuario = usario;
+    };
 
     public isAuthenticated() {
         return this.authState;
@@ -24,12 +28,20 @@ export class UsuarioService {
     public setAuthenticated = function (valor: Boolean) {
         this.authState = valor;
     };
-    public registrarUsuario = function (usuario: UsuarioAppp) {
+    public registrarUsuario = function (usuario: UsuarioApp) {
         const requestOptions = new RequestOptions();
         requestOptions.restUrl = PROC_XML_REST_REGISTRO_USUARIO;
+        usuario.opcional = 'CREACION';
         return this.genericService.ejecucionGenerica(usuario, PROC_XML_REGISTRAR_USUARIO, requestOptions);
     };
 
+    public actualizarUsuario = function (usuario: UsuarioApp) {
+        const requestOptions = new RequestOptions();
+        requestOptions.restUrl = PROC_XML_REST_REGISTRO_USUARIO;
+        usuario.opcional = 'ACTUALIZACION';
+        console.log('Empieza la actualizacion');
+        return this.genericService.ejecucionGenerica(usuario, PROC_XML_REGISTRAR_USUARIO, requestOptions);
+    };
 
     public verificarUsuario = function (parametro: string) {
         const requestOptions = new RequestOptions();

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
-import {UsuarioAppp} from '../../../../classes/UsuarioApp';
+import {UsuarioApp} from '../../../../classes/UsuarioApp';
 import {DURATION_TOAST} from '../../../config/config';
 import {Platform, ToastController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
@@ -13,7 +13,7 @@ import {LoginStorageService} from '../../../services/seguridad/login-storage.ser
     styleUrls: ['./password.page.scss'],
 })
 export class PasswordPage implements OnInit {
-    user: UsuarioAppp = null;
+    user: UsuarioApp = null;
     parametro: string;
 
     constructor(private activateRoute: ActivatedRoute,
@@ -36,9 +36,8 @@ export class PasswordPage implements OnInit {
 
     verifyUser(parameter) {
         if (this.user.clave === parameter) {
-            console.log('Objeto Capturado');
-            console.log(JSON.stringify(this.user));
             this.usuarioSvc.setAuthenticated(true);
+            this.usuarioSvc.setUsuario(this.user);
             this.loginStorageSvc.guardarStorage(this.user);
             this.router.navigate(['/home']);
         } else {

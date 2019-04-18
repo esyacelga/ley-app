@@ -22,6 +22,11 @@ export class HomePage implements OnInit {
         this.ubicacionSvc.iniciarGeolocalicacion();
     }
 
+
+    borrarVariablres() {
+        this.pushSvc.eliminarVariables();
+    }
+
     borrarMensajes() {
         this.pushSvc.borrarMensajes('mensajes');
         this.ionViewWillEnter();

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {Platform} from '@ionic/angular';
 import {UsuarioService} from './usuario.service';
-import {UsuarioAppp} from '../../../classes/UsuarioApp';
+import {UsuarioApp} from '../../../classes/UsuarioApp';
 import {UtilsService} from '../commons/utils.service';
 
 @Injectable({
@@ -10,7 +10,7 @@ import {UtilsService} from '../commons/utils.service';
 })
 export class LoginStorageService {
 
-    user: UsuarioAppp;
+    user: UsuarioApp;
 
     constructor(private storage: Storage, private platform: Platform, private usuarioSvc: UsuarioService, private utilSvc: UtilsService) {
     }
@@ -43,7 +43,7 @@ export class LoginStorageService {
         return promesa;
     }
 
-    guardarStorage(usuario: UsuarioAppp) {
+    guardarStorage(usuario: UsuarioApp) {
         if (this.platform.is('cordova')) {
             // const obj = this.utilSvc.toXML(usuario);
             this.storage.set('usuario', usuario);

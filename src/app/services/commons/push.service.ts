@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {OneSignal, OSNotification, OSNotificationPayload} from '@ionic-native/onesignal/ngx';
 import {Storage} from '@ionic/storage';
+import {UsuarioService} from '../seguridad/usuario.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class PushService {
     );
     userId: string;
 
-    constructor(private oneSignal: OneSignal, private storage: Storage) {
+    constructor(private oneSignal: OneSignal, private storage: Storage, private usrSvc: UsuarioService) {
         this.cargarMensajes();
     }
 
@@ -44,6 +45,14 @@ export class PushService {
             this.userId = info.userId;
             console.log('USERID-GENERADO');
             console.log(this.userId);
+            console.log('verificando ...');
+            console.log(JSON.stringify(this.usrSvc.usuario));
+            if (this.usrSvc.usuario && !this.usrSvc.usuario.playerID) {
+                this.usrSvc.usuario.playerID = this.userId;
+                console.log('Entro a actualizar el usuaro');
+                this.usrSvc.actualizarUsuario(this.usrSvc.usuario);
+            }
+
         });
 
         this.oneSignal.endInit();
@@ -74,6 +83,10 @@ export class PushService {
         await this.storage.remove(key);
         this.mensajes = [];
         this.guardarMensajes(this.mensajes);
+    }
+
+    eliminarVariables() {
+        this.storage.clear();
     }
 
     async cargarMensajes() {

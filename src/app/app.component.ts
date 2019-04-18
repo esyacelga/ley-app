@@ -5,7 +5,6 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {LoginStorageService} from './services/seguridad/login-storage.service';
 import {UsuarioService} from './services/seguridad/usuario.service';
-import {PushService} from './services/commons/push.service';
 
 @Component({
     selector: 'app-root',
@@ -13,12 +12,11 @@ import {PushService} from './services/commons/push.service';
 })
 export class AppComponent {
     constructor(
-        private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private navCtrl: NavController,
+        private platform: Platform,
         private usuarioSvc: UsuarioService,
-        private pushSvc: PushService,
         private loginStorage: LoginStorageService
     ) {
         this.initializeApp();
@@ -26,11 +24,7 @@ export class AppComponent {
 
     initializeApp() {
         this.platform.ready().then(() => {
-            //Valida que al aplicacion no permita, iniciarlizar las notificaciones cuando este
-            //se encuetre en modo browser
-            if (this.platform.is('cordova')) {
-                this.pushSvc.configuracionInicial();
-            }
+
             this.loginStorage.cargarStorage().then(response => {
                 // @ts-ignore
                 if (response && response.clave) {

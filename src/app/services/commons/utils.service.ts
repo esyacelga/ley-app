@@ -143,6 +143,7 @@ export class UtilsService {
         const data = this.toXML(genericObject);
         const obj = new UploadFile();
         obj.valorXml = data;
+        console.log('xml generado: ' + data);
         obj.storeProcedure = nombreSP;
         const url = URL_SERVICIOS + '/' + urlRestService;
         return this.http.post(url, obj);

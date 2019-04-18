@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UsuarioAppp} from '../../../../classes/UsuarioApp';
+import {UsuarioApp} from '../../../../classes/UsuarioApp';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RegistroMensajes} from './RegistroMensajes';
@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    usuarioApp: UsuarioAppp = new UsuarioAppp();
+    usuarioApp: UsuarioApp = new UsuarioApp();
     loginForm: FormGroup;
     registoMensajes: RegistroMensajes = new RegistroMensajes();
     error_messages = this.registoMensajes.error_messages;
@@ -66,7 +66,7 @@ export class RegisterPage implements OnInit {
 
 
     registerNewUser() {
-        const usuarioApp = <UsuarioAppp>this.loginForm.value;
+        const usuarioApp = <UsuarioApp>this.loginForm.value;
         this.usuarioService.registrarUsuario(usuarioApp).then(respuesta => {
             this.router.navigate(['/home']);
             console.log('');
