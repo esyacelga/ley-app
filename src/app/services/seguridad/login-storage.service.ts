@@ -15,7 +15,7 @@ export class LoginStorageService {
     constructor(private storage: Storage, private platform: Platform, private usuarioSvc: UsuarioService, private utilSvc: UtilsService) {
     }
 
-    cargarStorage() {
+    cargarUsuarioStorage() {
         const promesa = new Promise((resolve, reject) => {
             if (this.platform.is('cordova')) {
                 console.log('Inicializando storage');
@@ -24,6 +24,7 @@ export class LoginStorageService {
                     let dataUser = null;
                     try {
                         dataUser = JSON.parse(JSON.stringify(val));
+                        this.usuarioSvc.usuario = dataUser;
                     } catch (error) {
                         console.error(error);
                         console.log(error);
@@ -36,6 +37,7 @@ export class LoginStorageService {
             } else {
                 if (localStorage.getItem('usuario')) {
                     this.user = JSON.parse(localStorage.getItem('usuario'));
+                    this.usuarioSvc.usuario = this.user;
                 }
                 resolve(this.user);
             }

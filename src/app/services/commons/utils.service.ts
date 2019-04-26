@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Builder} from 'xml2js';
 import {UploadFile} from '../../../classes/UploadFile';
 import {URL_SERVICIOS} from '../../config/config';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -36,17 +36,28 @@ export class UtilsService {
         return obj.root.entidad.row;
     };
 
+    private formatearListaXml = function (lst) {
+        const lista = [];
+        if (lst == null) {
+            return null;
+        }
+        for (const entry of lst) {
+            lista.push(entry.row);
+        }
+        return lista;
+    };
+
     /**
-     * Convierte el resultado de un xml en una listado xml
+     *
      * @param data
      */
-    listaDesdeXML = function (data) {
+    public listaDesdeXML = function (data) {
         const parseXml = this.parseXml(data);
         const obj = this.xmlToJsonFormat(parseXml);
         if (!obj) {
             return null;
         }
-        return obj.root.entidad;
+        return this.formatearListaXml(obj.root.entidad);
     };
 
     private xmlToJsonFormat = function (xml) {

@@ -52,6 +52,17 @@ export class UsuarioService {
         };
         return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
     };
+
+    public obtenerServidoresPorUsuario = function (usuario: string) {
+        const requestOptions = new RequestOptions();
+        //requestOptions.responseType = ;
+        const obj = {
+            parametroXML: usuario,
+            tipoConsulta: 'OBTENERSERVIDORES'
+        };
+        return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+    };
+
     public obtenerUsuarioPorId = function (parametro: string) {
         const requestOptions = new RequestOptions();
         requestOptions.responseType = 1;

@@ -25,7 +25,7 @@ export class AppComponent {
     initializeApp() {
         this.platform.ready().then(() => {
 
-            this.loginStorage.cargarStorage().then(response => {
+            this.loginStorage.cargarUsuarioStorage().then(response => {
                 // @ts-ignore
                 if (response && response.clave) {
                     this.usuarioSvc.setAuthenticated(true);
