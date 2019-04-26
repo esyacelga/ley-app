@@ -3,6 +3,12 @@
     <ion-title>
       CONFIGURACION
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="borrarVariablres();" color="primary">
+        <ion-icon slot="icon-only" name="save">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,22 +16,10 @@
 
 
   <!-- List of Input Items -->
-  <ion-list color="dark">
-    <ion-item>
-      <ion-label>Input</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Toggle</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label>Radio</ion-label>
-      <ion-radio slot="end"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>Checkbox</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
+  <ion-list color="dark" >
+    <ion-item color="dark" *ngFor="let iterador of lstServidores">
+      <ion-label>{{iterador.nombreAmbiente}}</ion-label>
+      <ion-toggle [(ngModel)]="iterador.verNotificacion" slot="end"></ion-toggle>
     </ion-item>
   </ion-list>
 

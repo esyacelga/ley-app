@@ -3,6 +3,7 @@ import {UsuarioApp} from '../../../classes/UsuarioApp';
 import {GenericAsyncService} from '../commons/generic-async.service';
 import {PROC_XML_CONSULTAS_USUARIO, PROC_XML_REGISTRAR_USUARIO, PROC_XML_REST_REGISTRO_USUARIO} from '../../config/config';
 import {RequestOptions} from '../../../classes/RequestOptions';
+import {UsuarioServidor} from '../../../classes/UsuarioServidor';
 
 @Injectable({
     providedIn: 'root'
@@ -53,15 +54,18 @@ export class UsuarioService {
         return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
     };
 
-    public obtenerServidoresPorUsuario = function (usuario: string) {
+    async obtenerServidoresPorUsuario(usuario: string) {
         const requestOptions = new RequestOptions();
-        //requestOptions.responseType = ;
+        let lstUsuarioServidor: Array<UsuarioServidor> = [];
         const obj = {
             parametroXML: usuario,
             tipoConsulta: 'OBTENERSERVIDORES'
         };
-        return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
-    };
+        // @ts-ignore
+        lstUsuarioServidor = await this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+        return lstUsuarioServidor;
+
+    }
 
     public obtenerUsuarioPorId = function (parametro: string) {
         const requestOptions = new RequestOptions();
