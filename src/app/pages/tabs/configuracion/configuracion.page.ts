@@ -15,8 +15,8 @@ export class ConfiguracionPage implements OnInit {
     }
 
 
-    guardarConfiguracion(lst) {
-
+    guardarConfiguracion(lstUsuarioServidor: Array<UsuarioServidor>) {
+        this.usuarioSvc.guardarConfiguracion(lstUsuarioServidor);
     }
 
     async cargarUsuario(idUsuarioApp) {

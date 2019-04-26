@@ -4,6 +4,8 @@ import {GenericAsyncService} from '../commons/generic-async.service';
 import {PROC_XML_CONSULTAS_USUARIO, PROC_XML_REGISTRAR_USUARIO, PROC_XML_REST_REGISTRO_USUARIO} from '../../config/config';
 import {RequestOptions} from '../../../classes/RequestOptions';
 import {UsuarioServidor} from '../../../classes/UsuarioServidor';
+import {ContenedorUsuarioServidor} from '../../../classes/ContenedorUsuarioServidor';
+import {UtilsService} from '../commons/utils.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,7 @@ export class UsuarioService {
     usuario: UsuarioApp;
     authState;
 
-    constructor(private genericService: GenericAsyncService) {
+    constructor(private genericService: GenericAsyncService, private utils: UtilsService) {
 
     }
 
@@ -54,15 +56,25 @@ export class UsuarioService {
         return this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
     };
 
+    async guardarConfiguracion(lstUsuarioServidor: Array<UsuarioServidor>) {
+        // @ts-ignore
+        lstUsuarioServidor = await this.genericService.getGenericObjects(new ContenedorUsuarioServidor('GUARDARCONFIGURACION', lstUsuarioServidor), PROC_XML_CONSULTAS_USUARIO);
+        return lstUsuarioServidor;
+
+    }
+
+
     async obtenerServidoresPorUsuario(usuario: string) {
         const requestOptions = new RequestOptions();
         let lstUsuarioServidor: Array<UsuarioServidor> = [];
+
         const obj = {
             parametroXML: usuario,
             tipoConsulta: 'OBTENERSERVIDORES'
         };
         // @ts-ignore
-        lstUsuarioServidor = await this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+        const lista = await this.genericService.getGenericObjects(obj, PROC_XML_CONSULTAS_USUARIO, requestOptions);
+        lstUsuarioServidor = this.utils.modificarValoresBooleanos(lista, 'verNotificacion');
         return lstUsuarioServidor;
 
     }

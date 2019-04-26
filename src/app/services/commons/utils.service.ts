@@ -12,6 +12,39 @@ export class UtilsService {
     constructor(private  http: HttpClient) {
     }
 
+    /**
+     * Caracter a booleano
+     * @param caracter
+     */
+    private toBoolean = function (caracter) {
+        if (!caracter) {
+            return false;
+        }
+        const dato = caracter;
+        if (dato === '1' || dato === 1 || caracter === 'true') {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
+    modificarValoresBooleanos = function (lista, campo) {
+        if (lista) {
+            if (lista) {
+                for (let i = 0; i < lista.length; i++) {
+                    const valores = lista[i];
+                    for (const aux in valores) {
+                        if (aux === campo) {
+                            lista[i][aux] = this.toBoolean(lista[i][aux]);
+                        }
+                    }
+
+                }
+            }
+        }
+        return lista;
+
+    };
 
     private parseXml = function (data) {
         let parser, xmlDoc;
