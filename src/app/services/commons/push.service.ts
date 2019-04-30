@@ -44,12 +44,8 @@ export class PushService {
         this.oneSignal.getIds().then(info => {
             this.userId = info.userId;
             console.log('USERID-GENERADO');
-            console.log(this.userId);
-            console.log('verificando ...');
-            console.log(JSON.stringify(this.usrSvc.usuario));
             if (this.usrSvc.usuario && !this.usrSvc.usuario.playerID) {
                 this.usrSvc.usuario.playerID = this.userId;
-                console.log('Entro a actualizar el usuaro');
                 this.usrSvc.actualizarUsuario(this.usrSvc.usuario);
             }
 

@@ -14,8 +14,6 @@ export class AuthGuardHomeService implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isAuthenticated()) {
-            //Valida que al aplicacion no permita, iniciarlizar las notificaciones cuando este
-            //se encuetre en modo browser
             if (this.platform.is('cordova')) {
                 this.pushSvc.configuracionInicial();
             }

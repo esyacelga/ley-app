@@ -14,12 +14,14 @@ import {IonicStorageModule} from '@ionic/storage';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {OneSignal} from '@ionic-native/onesignal/ngx';
 import {TabsPageModule} from './tabs/tabs.module';
+import {AuthGuardHomeService} from './guards/seguridad/home/auth-guard-home.service';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
     imports: [TabsPageModule, CommonModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, HttpClientJsonpModule, IonicStorageModule.forRoot()],
     providers: [
+        AuthGuardHomeService,
         StatusBar,
         OneSignal,
         Geolocation,

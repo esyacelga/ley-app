@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TabsPage} from './tabs.page';
-//{ path: 'configuracion', loadChildren: './pages/tabs/configuracion/configuracion.module#ConfiguracionPageModule' }
+import {AuthGuardHomeService} from '../guards/seguridad/home/auth-guard-home.service';
+
 const routes: Routes = [
     {
         path: 'tabs',
@@ -12,7 +13,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: '../pages/tabs/produccion/produccion.module#ProduccionPageModule'
+                        loadChildren: '../pages/tabs/produccion/produccion.module#ProduccionPageModule', canActivate: [AuthGuardHomeService]
                     }
                 ]
             },
