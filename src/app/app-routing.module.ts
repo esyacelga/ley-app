@@ -4,9 +4,9 @@ import {AuthGuardHomeService} from './guards/seguridad/home/auth-guard-home.serv
 
 const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
-    /*{
+    {
         path: 'home', loadChildren: './home/home.module#HomePageModule', canActivate: [AuthGuardHomeService]
-    },*/
+    },
     {path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'},
     {path: 'signin', loadChildren: './pages/login/signin/signin.module#SigninPageModule'},
     {path: 'register', loadChildren: './pages/login/register/register.module#RegisterPageModule'},
