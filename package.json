@@ -46,6 +46,7 @@
     "core-js": "^2.5.4",
     "events": "^3.0.0",
     "js2xmlparser": "^4.0.0",
+    "ngx-filter-pipe": "^2.1.2",
     "onesignal-cordova-plugin": "^2.4.6",
     "rxjs": "~6.3.3",
     "stream": "0.0.2",

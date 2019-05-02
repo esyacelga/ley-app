@@ -7,6 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {ProduccionPage} from './produccion.page';
 import {PipesModule} from '../../../pipes/pipes.module';
+import {FilterPipeModule} from 'ngx-filter-pipe';
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
+        FilterPipeModule,
         PipesModule,
         CommonModule,
         FormsModule,

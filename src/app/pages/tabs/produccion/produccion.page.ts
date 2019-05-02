@@ -1,5 +1,4 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {OSNotificationPayload} from '@ionic-native/onesignal';
 import {UbicacionProviderService} from '../../../services/commons/ubicacion-provider.service';
 import {PushService} from '../../../services/commons/push.service';
 import {ModalController} from '@ionic/angular';
@@ -12,7 +11,10 @@ import {LogviewPage} from '../../../modals/system/logview/logview.page';
 })
 export class ProduccionPage implements OnInit {
 
-    mensajes: OSNotificationPayload[] = [];
+    mensajes: any[] = [];
+    customFilter: any = {additionalData: {ambiente: 'PROD'}};
+
+
 
 
     constructor(private zone: NgZone,
