@@ -68,7 +68,7 @@ export class RegisterPage implements OnInit {
     registerNewUser() {
         const usuarioApp = <UsuarioApp>this.loginForm.value;
         this.usuarioService.registrarUsuario(usuarioApp).then(respuesta => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/signin']);
             console.log('');
         });
 
