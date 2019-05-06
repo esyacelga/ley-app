@@ -33,6 +33,7 @@ export class PushService {
         this.oneSignal.handleNotificationReceived().subscribe((noti) => {
             // do something when notification is received
             console.log('Notificacion Recebida');
+            console.log(JSON.stringify(noti));
             this.notificacionRecibida(noti);
         });
 
@@ -44,7 +45,7 @@ export class PushService {
         this.oneSignal.getIds().then(info => {
             this.userId = info.userId;
             console.log('USERID-GENERADO');
-            console.log(this.usrSvc.playerId);
+            console.log(info.userId);
             this.usrSvc.playerId = info.userId;
 
         });
@@ -57,6 +58,7 @@ export class PushService {
         const payload = noti.payload;
         const existePush = this.mensajes.find(mensaje =>
             mensaje.notificationID === payload.notificationID);
+
 
         if (existePush) {
             return;

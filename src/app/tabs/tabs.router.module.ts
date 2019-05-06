@@ -31,7 +31,7 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: '../pages/tabs/qa/qa.module#QAPageModule'
+                        loadChildren: '../pages/tabs/qa/qa.module#QAPageModule', canActivate: [AuthGuardHomeService]
                     }
                 ]
             },
@@ -40,20 +40,20 @@ const routes: Routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: '../pages/tabs/piloto/piloto.module#PilotoPageModule'
+                        loadChildren: '../pages/tabs/piloto/piloto.module#PilotoPageModule', canActivate: [AuthGuardHomeService]
                     }
                 ]
             },
             {
                 path: '',
-                redirectTo: '/tabs/produccion',
+                redirectTo: '/tabs/qa',
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/produccion',
+        redirectTo: '/tabs/qa',
         pathMatch: 'full'
     }
 ];

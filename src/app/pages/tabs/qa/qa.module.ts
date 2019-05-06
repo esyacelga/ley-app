@@ -1,26 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {RouterModule, Routes} from '@angular/router';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { QAPage } from './qa.page';
+import {QAPage} from './qa.page';
+import {FilterPipeModule} from 'ngx-filter-pipe';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: QAPage
-  }
+    {
+        path: '',
+        component: QAPage
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [QAPage]
+    imports: [
+        FilterPipeModule,
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes)
+    ],
+    declarations: [QAPage]
 })
-export class QAPageModule {}
+export class QAPageModule {
+}

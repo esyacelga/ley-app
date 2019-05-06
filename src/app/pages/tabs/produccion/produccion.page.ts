@@ -51,6 +51,9 @@ export class ProduccionPage implements OnInit {
         this.pushSvc.pushLitener.subscribe(noti => {
             this.zone.run(() => {
                 this.mensajes.unshift(noti);
+                console.log('Mensaje del subscriptor produccion..');
+                console.log(JSON.stringify(noti));
+                console.log('data: ' + JSON.stringify(this.mensajes));
             });
         });
     }
