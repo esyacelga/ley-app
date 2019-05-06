@@ -1,22 +1,19 @@
 import {Injectable} from '@angular/core';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular/router';
-import {PushService} from '../../../services/commons/push.service';
-import {Platform} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuardHomeService implements CanActivate {
 
-    constructor(private auth: UsuarioService, private pushSvc: PushService, private platform: Platform) {
+    constructor(private auth: UsuarioService) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (this.auth.isAuthenticated()) {
-            if (this.platform.is('cordova')) {
-                this.pushSvc.configuracionInicial();
-            }
+            console.log('A cambiado de tab');
+            this.auth.actualizarPlayerId();
             return true;
         } else {
             return false;

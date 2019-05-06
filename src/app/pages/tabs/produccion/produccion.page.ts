@@ -1,5 +1,4 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {UbicacionProviderService} from '../../../services/commons/ubicacion-provider.service';
 import {PushService} from '../../../services/commons/push.service';
 import {ModalController} from '@ionic/angular';
 import {LogviewPage} from '../../../modals/system/logview/logview.page';
@@ -15,13 +14,9 @@ export class ProduccionPage implements OnInit {
     customFilter: any = {additionalData: {ambiente: 'PROD'}};
 
 
-
-
     constructor(private zone: NgZone,
-                public ubicacionSvc: UbicacionProviderService,
                 public pushSvc: PushService,
                 public modalController: ModalController) {
-        this.ubicacionSvc.iniciarGeolocalicacion();
     }
 
 

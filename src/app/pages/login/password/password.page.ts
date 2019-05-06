@@ -37,6 +37,8 @@ export class PasswordPage implements OnInit {
     verifyUser(parameter) {
         if (this.user.clave === parameter) {
             this.usuarioSvc.setAuthenticated(true);
+            console.log('Usuario Obtenido');
+            console.log(JSON.stringify(this.user));
             this.usuarioSvc.setUsuario(this.user);
             this.loginStorageSvc.guardarStorage(this.user);
             this.router.navigate(['/tabs']);

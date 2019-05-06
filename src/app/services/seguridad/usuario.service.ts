@@ -12,6 +12,7 @@ import {UtilsService} from '../commons/utils.service';
 })
 export class UsuarioService {
 
+    playerId: String = null;
     usuario: UsuarioApp;
     authState;
 
@@ -44,6 +45,23 @@ export class UsuarioService {
         usuario.opcional = 'ACTUALIZACION';
         console.log('Empieza la actualizacion');
         return this.genericService.ejecucionGenerica(usuario, PROC_XML_REGISTRAR_USUARIO, requestOptions);
+    };
+
+
+    /**
+     * Este me todo se ejecuta cuando en el guard de la aplicacion
+     * no esta registrado el player id
+     *
+     */
+    public actualizarPlayerId = function () {
+        console.log('Ingreso a actualizar el id de usuario');
+        console.log(this.playerId);
+        console.log(this.usuario.playerID);
+        if (this.playerId !== null && this.playerId !== '' && this.usuario && this.usuario.playerID !== this.playerId) {
+            console.log('El player id no coincide con la base por lo que se empieza a actualizar');
+            this.usuario.playerID = this.playerId;
+            this.actualizarUsuario(this.usuario);
+        }
     };
 
     public verificarUsuario = function (parametro: string) {
