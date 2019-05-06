@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UsuarioService} from '../../../services/seguridad/usuario.service';
 import {LoginStorageService} from '../../../services/seguridad/login-storage.service';
 import {UsuarioServidor} from '../../../../classes/UsuarioServidor';
+import {PushService} from '../../../services/commons/push.service';
+import {NavController} from '@ionic/angular';
 
 @Component({
     selector: 'app-configuracion',
@@ -11,7 +13,9 @@ import {UsuarioServidor} from '../../../../classes/UsuarioServidor';
 export class ConfiguracionPage implements OnInit {
     lstServidores: Array<UsuarioServidor> = [];
 
-    constructor(private usuarioSvc: UsuarioService, private loginStorage: LoginStorageService) {
+    constructor(private usuarioSvc: UsuarioService,
+                private loginStorage: LoginStorageService, private navCtrl: NavController,
+                public pushSvc: PushService) {
     }
 
 
@@ -23,6 +27,12 @@ export class ConfiguracionPage implements OnInit {
         const data = await this.usuarioSvc.obtenerServidoresPorUsuario(idUsuarioApp);
         this.lstServidores = data;
     }
+
+    cerrarSecion() {
+        this.pushSvc.eliminarVariables();
+        this.navCtrl.navigateRoot('signin');
+    }
+
 
     ngOnInit() {
         this.loginStorage.cargarUsuarioStorage().then(response => {

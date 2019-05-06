@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar color="dark">
     <ion-title>
-      CONFIGURACION
+      Configuración
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="guardarConfiguracion(lstServidores);" color="primary">
@@ -21,9 +21,9 @@
       <ion-label>{{iterador.nombreAmbiente}}</ion-label>
       <ion-toggle [(ngModel)]="iterador.verNotificacion" slot="end"></ion-toggle>
     </ion-item>
-    <ion-item color="dark">
-      <ion-label>Cerrar seccion</ion-label>
-      <ion-toggle [(ngModel)]="iterador.verNotificacion" slot="end"></ion-toggle>
+    <ion-item color="dark" (click)="cerrarSecion()">
+      <ion-label> Cerrar sesión</ion-label>
+
     </ion-item>
   </ion-list>
 

@@ -20,9 +20,6 @@ export class QAPage implements OnInit {
     }
 
 
-    borrarVariablres() {
-        this.pushSvc.eliminarVariables();
-    }
 
     borrarMensajes() {
         this.pushSvc.borrarMensajes('mensajes');
