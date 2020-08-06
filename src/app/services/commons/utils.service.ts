@@ -43,7 +43,6 @@ export class UtilsService {
             }
         }
         return lista;
-
     };
 
     private parseXml = function (data) {

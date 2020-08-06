@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ec.org.isspol" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ec.org.isspol" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ISSPOL-APP</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="eyacelga@isspol.org.ec" href="https://www.isspol.org.ec:2306">ISSPOL Team</author>
@@ -90,5 +90,5 @@
     </edit-config>
     <plugin name="onesignal-cordova-plugin" spec="2.4.6" />
     <allow-navigation href="http://192.168.0.123:8100" sessionid="682bef4e" />
-    <engine name="android" spec="~7.1.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>
